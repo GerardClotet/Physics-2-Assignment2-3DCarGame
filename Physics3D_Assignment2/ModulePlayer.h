@@ -27,4 +27,7 @@ public:
 	float acceleration;
 	float brake;
 	float offset_x = 0;
+	int numBoosts=0;
+	float camera_transitionX;
+	float camera_transitionY;
 };
