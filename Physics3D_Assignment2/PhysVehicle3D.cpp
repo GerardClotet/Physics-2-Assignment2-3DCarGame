@@ -48,8 +48,22 @@ void PhysVehicle3D::Render()
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
+	// CAR'S CABIN
+
+	Cube cabin(info.cabin_size.x, info.cabin_size.y, info.cabin_size.z);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&cabin.transform);
+
+	btVector3 offset_cabin(info.cabin_offset.x, info.cabin_offset.y, info.cabin_offset.z);
+	offset_cabin = offset_cabin.rotate(q.getAxis(), q.getAngle());
+
+	cabin.transform.M[12] += offset_cabin.getX();
+	cabin.transform.M[13] += offset_cabin.getY();
+	cabin.transform.M[14] += offset_cabin.getZ();
+
+	cabin.color = Red;
 
 	chassis.Render();
+	cabin.Render();
 }
 
 // ----------------------------------------------------------------------------
