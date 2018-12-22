@@ -8,7 +8,7 @@ class vec3;
 #define MAX_ACCELERATION 1000.0f
 #define TURN_DEGREES 15.0f * DEGTORAD
 #define BRAKE_POWER 1000.0f
-#define START_POINT 10,100,10
+#define START_POINT 0,100.5f,0
 class ModulePlayer : public Module
 {
 public:

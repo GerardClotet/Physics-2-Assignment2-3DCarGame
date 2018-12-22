@@ -102,7 +102,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 0, 10);
+	vehicle->SetPos(0, 101, 0);
 	App->camera->Position.x = vehicle->GetPos().x;
 	return true;
 }
@@ -249,41 +249,41 @@ vec3 ModulePlayer::PlayerCamPos()
 		//front_vec.x = front_vec.x + camera_transitionX;
 	}
 
-	if (turn > -TURN_DEGREES && turn_increase == false) // turn > -TURN_DEGREES && turn_increase == false
-	{
-		
-		
-		if (camera_transitionZ <= 15 && camera_transitionZ >=0)
-		{
-			camera_transitionZ += 0.2;
-		}
-		else if (rotOrigin == true &&  camera_transitionZ >=0)
-		{
-			camera_transitionZ -= 0.2;
-		}
-		else
-		{
-			camera_transitionZ = 0;
-		}
-		front_vec.x = front_vec.x + camera_transitionZ;
+	//if (turn > -TURN_DEGREES && turn_increase == false) // turn > -TURN_DEGREES && turn_increase == false
+	//{
+	//	
+	//	
+	//	if (camera_transitionZ <= 15 && camera_transitionZ >=0)
+	//	{
+	//		camera_transitionZ += 0.2;
+	//	}
+	//	else if (rotOrigin == true &&  camera_transitionZ >=0)
+	//	{
+	//		camera_transitionZ -= 0.2;
+	//	}
+	//	else
+	//	{
+	//		camera_transitionZ = 0;
+	//	}
+	//	front_vec.x = front_vec.x + camera_transitionZ;
 
-	}
-	else if (turn < TURN_DEGREES && turn_increase == true) //turn < TURN_DEGREES && turn_increase == true
-	{
-		if(camera_transitionZ >= -15 && camera_transitionZ <= 0)
-		{
-			camera_transitionZ -= 0.2;
-		}
-		else if (rotOrigin == true && camera_transitionZ <= 0)
-		{
-			camera_transitionZ += 0.2;
-		}
-		else
-		{
-			camera_transitionZ = 0;
-		}
-		front_vec.x = -front_vec.x + camera_transitionZ;
-	}
+	//}
+	//else if (turn < TURN_DEGREES && turn_increase == true) //turn < TURN_DEGREES && turn_increase == true
+	//{
+	//	if(camera_transitionZ >= -15 && camera_transitionZ <= 0)
+	//	{
+	//		camera_transitionZ -= 0.2;
+	//	}
+	//	else if (rotOrigin == true && camera_transitionZ <= 0)
+	//	{
+	//		camera_transitionZ += 0.2;
+	//	}
+	//	else
+	//	{
+	//		camera_transitionZ = 0;
+	//	}
+	//	front_vec.x = -front_vec.x + camera_transitionZ;
+	//}
 
 	App->camera->Position = front_vec + vehicle->GetPos();
 	
