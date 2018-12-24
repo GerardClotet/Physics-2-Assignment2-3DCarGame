@@ -17,7 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	numBoosts = 3;
+	jumpForceY = 3000;
 	// Camera Var
 	camera_transitionX = 10;
 	camera_transitionY = 5;
@@ -33,7 +33,7 @@ bool ModulePlayer::Start()
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 50.5;
+	car.frictionSlip = 1000.0f;
 	car.maxSuspensionForce = 6000.0f;
 
 	// Wheel properties ---------------------------------------
@@ -102,7 +102,8 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 101, 0);
+	vehicle->SetPos(-104.7, 75, 38.3);
+	
 	App->camera->Position.x = vehicle->GetPos().x;
 	return true;
 }
@@ -132,7 +133,7 @@ update_status ModulePlayer::Update(float dt)
 		
 	}
 	
-
+	
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if (turn < TURN_DEGREES)
@@ -160,18 +161,11 @@ update_status ModulePlayer::Update(float dt)
 	{
 		brake = BRAKE_POWER;
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numBoosts >0)
+	
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
 	{
-		 
-		int impulse = 50000;
-		acceleration = acceleration + impulse;
-		//numBoosts--;
-		if (numBoosts < 0)
-		{
-			numBoosts = 0;
-		}
-
+		
+		vehicle->Push(0,jumpForceY,0);
 	}
 	if (App->camera->debugMove == false)
 	{

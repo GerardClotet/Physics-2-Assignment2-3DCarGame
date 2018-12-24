@@ -5,7 +5,7 @@
 #include "Primitive.h"
 #include "glmath.h"
 #define MAX_SNAKE 2
-#define STANDARD_SIZE vec3(5,0.5,5)
+#define STANDARD_SIZE vec3(5,2,5)
 class Cube;
 class DebugDrawer;
 struct PhysBody3D;
@@ -53,7 +53,7 @@ public:
 
 	p2List <Cube> cubes;
 	vec3 vec3_zero = { 0.0f,0.0f,0.0f };
-	vec3 axis_x = { 1.0f,0.0f,0.0f }, axis_y = { 0.0f,1.0f,0.0f }, axis_z = { 0.0f,0.0f,1.0f };
+	vec3 axis_x = { 1.0f,0.0f,0.0f }, axis_y = { 0.0f,1.0f,0.0f }, axis_z = { 0.0f,0.0f,1.0f }, axis_xy = {1,1,0}, axis_xz = { 1,0,1 }, axis_yz = { 0,1,1 };
 	vec3 vec3jeje = { 20.0f,900.0f, 0.0f };
 
 	/*Cube c(10, 4, 10);

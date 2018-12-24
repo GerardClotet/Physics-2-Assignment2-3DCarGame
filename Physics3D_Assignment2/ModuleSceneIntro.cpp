@@ -74,15 +74,53 @@ void ModuleSceneIntro::Speedway()
 void ModuleSceneIntro::LoadSpeedWay()
 {
 #define ROAD_TRY vec3(10,0.5,20)
+#define PLATFORM vec3(10,0.5f,10)
 	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x), White);
 	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x + STANDARD_SIZE.z), White);
 	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x + STANDARD_SIZE.z * 2), White);
-	CreateCube(ROAD_TRY, vec3(vec3_zero.x+4, vec3_zero.y + +50, vec3_zero.x + STANDARD_SIZE.z * 3 - 0.25f), White, -20.0f, axis_x);
-	//CreateCube(ROAD_DIM, vec3(vec3jeje.x+700*100000, vec3jeje.y+300, vec3jeje.z + ROAD_DIM.z * 2), White);
-	CreateCube(vec3(10, 4, 10), vec3(0, 100, 0), White);
-//	LOG("vec3zro: %f", vec3_zero.y + 100);
-	/*CreateCube(vec3(5, .1, 12), vec3(0, 0, 0), 0,vec3(0,0,0),200, Green);
-	CreateCube(vec3(5, .5, 12), vec3(0, 1, 20), -20, vec3(1, 0, 0), -200, Green);*/
+
+	//PROVA
+	CreateCube(vec3(3, 0.5, 15), vec3(5, 100, -15), Orange, -10, axis_xy);
+	CreateCube(vec3(3, 0.5, 15), vec3(0, 100, -17), LightBlue, 40, axis_yz);
+	CreateCube(vec3(3, 0.5, 15), vec3(-5, 100, -20), Yellow, 5, axis_yz);
+
+	//START_PLATFORM
+	CreateCube(PLATFORM, vec3(0, 102.2, 0.3), Red);
+
+	//START_RAMP
+	CreateCube(ROAD_TRY, vec3(vec3_zero.x, vec3_zero.y + +98.8f, 14.4f), White, 20.0f, axis_x);
+	CreateCube(vec3(10,0.5,7), vec3(vec3_zero.x, vec3_zero.y + +93, 30), White, 20.0f, axis_x);
+
+	//2nd PLAT
+	CreateCube(PLATFORM, vec3(0, 91.8, 38.3), Red);
+
+	//2n RAMP
+	CreateCube(vec3(40, 0.5, 15), vec3(-25, 95, 38.3), White, -10, axis_z);
+
+	//3 PLAT
+	CreateCube(PLATFORM, vec3(-48, 99, 38.3), Red);
+
+	//JUMP
+	CreateCube(vec3(3, 0.5, 15), vec3(-54, 98, 38.3), Green, 45, axis_z);
+	CreateCube(vec3(3, 0.5, 15), vec3(-56, 96, 38.3), Pink, 43, axis_z);
+	CreateCube(vec3(3, 0.5, 15), vec3(-58, 94, 38.3), LightBlue, 41, axis_z);
+	CreateCube(vec3(3, 0.5, 15), vec3(-60, 92.3, 38.3), Yellow, 38, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-62.5, 90.3, 38.3), Orange, 36, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-65.8, 88, 38.3), Red, 33, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-69, 85.9, 38.3), Green, 30, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-72.5, 84, 38.3), Pink, 27, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-76, 82.3, 38.3), LightBlue, 24, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-80.3, 80.3, 38.3), Yellow, 21, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-85.2, 78.7, 38.3), Orange, 18, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-89.2, 77.5, 38.3), Red, 15, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-93.2, 76.5, 38.3), Green, 12, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-97.1, 75.8, 38.3), Pink, 9, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-101.1, 75.3, 38.3), LightBlue, 6, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-104.7, 75, 38.3), Yellow, 3, axis_z);
+
+	CreateCube(vec3(80, 0.5, 15), vec3(-120, 75, 38.3), Yellow);
+	
+
 }
 
 //void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
@@ -103,17 +141,17 @@ void ModuleSceneIntro::LoadSpeedWay()
 
 void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, vec3 u, float mass)
 {
-	Cube c(dim.x, dim.y, dim.z);
-	c.SetPos(pos.x, pos.y, pos.z);
-	c.color = color;
+	Cube cube(dim.x, dim.y, dim.z);
+	cube.SetPos(pos.x, pos.y, pos.z);
+	cube.color = color;
 
 	if (angle != 0)
-		c.SetRotation(angle, vec3(u.x, u.y, u.z));
+		cube.SetRotation(angle, vec3(u.x, u.y, u.z));
 
 
-	App->physics->AddBody(c, mass);
+	App->physics->AddBody(cube, mass);
 
-	cubes.add(c);
+	cubes.add(cube);
 
 	//return c;
 }

@@ -8,7 +8,7 @@ class vec3;
 #define MAX_ACCELERATION 1000.0f
 #define TURN_DEGREES 15.0f * DEGTORAD
 #define BRAKE_POWER 1000.0f
-#define START_POINT 0,100.5f,0
+#define START_POINT 0,103,0
 class ModulePlayer : public Module
 {
 public:
@@ -23,11 +23,12 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
+	float jumpForceY;
 	float turn;
 	float acceleration;
 	float brake;
 	float offset_x = 0;
-	int numBoosts=0;
+	
 	float camera_transitionX;
 	float camera_transitionY;
 	float camera_transitionZ;
