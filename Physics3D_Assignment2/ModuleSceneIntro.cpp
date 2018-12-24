@@ -114,13 +114,17 @@ void ModuleSceneIntro::LoadSpeedWay()
 	CreateCube(vec3(4, 0.5, 15), vec3(-85.2, 78.7, 38.3), Orange, 18, axis_z);
 	CreateCube(vec3(4, 0.5, 15), vec3(-89.2, 77.5, 38.3), Red, 15, axis_z);
 	CreateCube(vec3(4, 0.5, 15), vec3(-93.2, 76.5, 38.3), Green, 12, axis_z);
-	CreateCube(vec3(4, 0.5, 15), vec3(-97.1, 75.8, 38.3), Pink, 9, axis_z);
+	CreateCube(vec3(4, 0.5, 15), vec3(-97.1, 75.8, 38.3), Pink, 9, axis_z); 
 	CreateCube(vec3(4, 0.5, 15), vec3(-101.1, 75.3, 38.3), LightBlue, 6, axis_z);
 	CreateCube(vec3(4, 0.5, 15), vec3(-104.7, 75, 38.3), Yellow, 3, axis_z);
 
+	//Plat
 	CreateCube(vec3(80, 0.5, 15), vec3(-120, 75, 38.3), Yellow);
 	
-
+	CreateCube(vec3(15, 0.5, 100), vec3(-120, 49.4, 88), White, 30, axis_x);
+	
+	CreateCube(vec3(15, 0.5, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x);
+	
 }
 
 //void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
