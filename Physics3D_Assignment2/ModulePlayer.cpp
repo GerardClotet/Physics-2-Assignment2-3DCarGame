@@ -24,9 +24,9 @@ bool ModulePlayer::Start()
 	camera_transitionZ = 0;
 	VehicleInfo car;
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 1, 6);
+	car.chassis_size.Set(1.5f, 1, 6);
 	car.chassis_offset.Set(0, 0.5f, 0);
-	car.cabin_size.Set(1, 0.5, 0.5);
+	car.cabin_size.Set(1.3f, 0.5, 2);
 	car.cabin_offset.Set(0,1,-0.7);
 
 	car.front_fender_size.Set(4, 0.2f, 1);
@@ -44,9 +44,9 @@ bool ModulePlayer::Start()
 	
 
 	// Wheel properties ---------------------------------------
-	float connection_height = 1.2f;
+	float connection_height = 1.5f;
 	float wheel_radius = 0.7f;
-	float wheel_width = 0.8f;
+	float wheel_width = 0.9f;
 	float suspensionRestLength = 1.2f;
 
 	// Don't change anything below this line ------------------
