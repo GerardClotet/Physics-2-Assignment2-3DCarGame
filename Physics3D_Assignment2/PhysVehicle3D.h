@@ -27,6 +27,9 @@ struct VehicleInfo
 	vec3 chassis_size;
 	vec3 chassis_offset;
 	
+	//Spoiler
+	vec3 front_fender_size;
+	vec3 front_fender_offset;
 
 	vec3 cabin_size;
 	vec3 cabin_offset;

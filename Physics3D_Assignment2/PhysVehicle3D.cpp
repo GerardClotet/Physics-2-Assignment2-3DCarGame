@@ -62,8 +62,24 @@ void PhysVehicle3D::Render()
 
 	cabin.color = Red;
 
+
+	// FRONT FENDER
+
+	Cube front_fender(info.front_fender_size.x, info.front_fender_size.y, info.front_fender_size.z);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&front_fender.transform);
+
+	btVector3 offset_front_fender(info.front_fender_offset.x, info.front_fender_offset.y, info.front_fender_offset.z);
+	offset_front_fender = offset_front_fender.rotate(q.getAxis(), q.getAngle());
+
+	front_fender.transform.M[12] += offset_front_fender.getX();
+	front_fender.transform.M[13] += offset_front_fender.getY();
+	front_fender.transform.M[14] += offset_front_fender.getZ();
+
+	front_fender.color = Blue;
+
 	chassis.Render();
 	cabin.Render();
+	front_fender.Render();
 }
 
 // ----------------------------------------------------------------------------
