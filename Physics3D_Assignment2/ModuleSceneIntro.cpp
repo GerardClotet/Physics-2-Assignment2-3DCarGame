@@ -98,7 +98,7 @@ void ModuleSceneIntro::LoadSpeedWay()
 	CreateCube(vec3(40, 0.5, 15), vec3(-25, 95, 38.3), White, -10, axis_z);
 
 	//3 PLAT
-	CreateCube(PLATFORM, vec3(-48, 99, 38.3), Red);
+	CreateCube(PLATFORM, vec3(-48, 98.5f, 38.3), Red);
 
 	//JUMP
 	CreateCube(vec3(3, 0.5, 15), vec3(-54, 98, 38.3), Green, 45, axis_z);
