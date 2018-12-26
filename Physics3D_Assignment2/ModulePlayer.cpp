@@ -33,6 +33,11 @@ bool ModulePlayer::Start()
 	car.front_fender_offset.Set(0, 0, 3);
 	
 
+	//SPOILER
+	
+	car.spoiler_size.Set(3,0.1f,0.2f);
+	car.spoiler_offset.Set(0,2,-4);
+
 
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;

@@ -28,6 +28,19 @@ struct VehicleInfo
 	vec3 chassis_offset;
 	
 	//Spoiler
+	vec3 spoiler_size;
+	vec3 spoiler_offset;
+	
+	vec3 spoiler_left_arm_size;
+	vec3 spoiler_right_arm_size;
+
+	vec3 spoiler_left_arm_offset;
+	vec3 spoiler_right_arm_offset;
+	
+	
+
+
+	//fender
 	vec3 front_fender_size;
 	vec3 front_fender_offset;
 
