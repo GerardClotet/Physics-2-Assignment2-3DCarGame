@@ -36,7 +36,15 @@ bool ModulePlayer::Start()
 	//SPOILER
 	
 	car.spoiler_size.Set(3,0.1f,0.2f);
-	car.spoiler_offset.Set(0,2,-4);
+	car.spoiler_offset.Set(0,2,-3);
+
+	//ARMS
+	car.spoiler_left_arm_size.Set(0.1f,2,0.1f);
+	car.spoiler_left_arm_offset.Set(0.5f,1,-3);
+
+	car.spoiler_right_arm_size.Set(0.1f, 2, 0.1f);
+	car.spoiler_right_arm_offset.Set(-0.5f, 1, -3);
+	
 
 
 	car.mass = 500.0f;

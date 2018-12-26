@@ -90,10 +90,41 @@ void PhysVehicle3D::Render()
 
 	spoiler.color = Green;
 
+	//SPOILER ARMS
+
+	Cube spoiler_left_arm(info.spoiler_left_arm_size.x, info.spoiler_left_arm_size.y, info.spoiler_left_arm_size.z);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&spoiler_left_arm.transform);
+
+	btVector3 offset_spoiler_left_arm(info.spoiler_left_arm_offset.x, info.spoiler_left_arm_offset.y, info.spoiler_left_arm_offset.z);
+	offset_spoiler_left_arm = offset_spoiler_left_arm.rotate(q.getAxis(), q.getAngle());
+
+	spoiler_left_arm.transform.M[12] += offset_spoiler_left_arm.getX();
+	spoiler_left_arm.transform.M[13] += offset_spoiler_left_arm.getY();
+	spoiler_left_arm.transform.M[14] += offset_spoiler_left_arm.getZ();
+
+	spoiler_left_arm.color = Green;
+
+	Cube spoiler_right_arm(info.spoiler_right_arm_size.x, info.spoiler_right_arm_size.y, info.spoiler_right_arm_size.z);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&spoiler_right_arm.transform);
+
+	btVector3 offset_spoiler_right_arm(info.spoiler_right_arm_offset.x, info.spoiler_right_arm_offset.y, info.spoiler_right_arm_offset.z);
+	offset_spoiler_right_arm = offset_spoiler_right_arm.rotate(q.getAxis(), q.getAngle());
+
+	spoiler_right_arm.transform.M[12] += offset_spoiler_right_arm.getX();
+	spoiler_right_arm.transform.M[13] += offset_spoiler_right_arm.getY();
+	spoiler_right_arm.transform.M[14] += offset_spoiler_right_arm.getZ();
+
+	spoiler_right_arm.color = Green;
+
+
+
+	//Renderer
 	chassis.Render();
 	cabin.Render();
 	front_fender.Render();
 	spoiler.Render();
+	spoiler_left_arm.Render();
+	spoiler_right_arm.Render();
 }
 
 // ----------------------------------------------------------------------------
