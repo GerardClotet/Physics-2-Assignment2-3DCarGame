@@ -11,6 +11,13 @@ class DebugDrawer;
 struct PhysBody3D;
 struct PhysMotor3D;
 
+enum Type {
+	Platform,
+	Offlimit,
+	Lap,
+	NoType
+};
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -25,7 +32,7 @@ public:
 
 	void Speedway();
 	void LoadSpeedWay();
-	void CreateCube(vec3 dimension = { 1.0f,1.0f,1.0f }, vec3 position = { 0.0f, 0.0f, 0.0f }, Color color = White, float angle = 0.0f, vec3 u = (0.0f, 0.0f, 0.0f), float mass = 0.0f);
+	void CreateCube(vec3 dimension = { 1.0f,1.0f,1.0f }, vec3 position = { 0.0f, 0.0f, 0.0f }, Color color = White, float angle = 0.0f, vec3 u = (0.0f, 0.0f, 0.0f), float mass = 0.0f, Type type = NoType);
 	void CreateStraigthPath(float dim_x , float dim_y, float dim_z,float length, float width, bool direction);
 public:
 	/*
