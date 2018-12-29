@@ -2,10 +2,12 @@
 #define __PhysBody3D_H__
 
 #include "p2List.h"
+#include "ModuleSceneIntro.h"
 
 class btRigidBody;
 class Module;
 class vec3;
+
 
 // =================================================
 struct PhysBody3D
@@ -26,6 +28,7 @@ private:
 	bool is_sensor = false;
 public:
 	p2List<Module*> collision_listeners;
+	Type type;
 };
 
 #endif // __PhysBody3D_H__

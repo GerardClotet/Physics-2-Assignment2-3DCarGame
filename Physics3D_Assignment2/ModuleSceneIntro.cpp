@@ -165,8 +165,7 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 	hinge_2->enableAngularMotor(true, -2.0f, INFINITE);
 }
 
-<<<<<<< HEAD
-=======
+
 
 
 //void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
@@ -184,7 +183,6 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 //	App->physics->AddBody(cube, mass);
 //	cubes.add(cube);
 //}
->>>>>>> bbd0e82455edaea3c30910fe7fbd4a7bf945e24e
 
 void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, vec3 u, float mass, Type type)
 {
