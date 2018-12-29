@@ -56,13 +56,16 @@ public:
 	vec3 axis_x = { 1.0f,0.0f,0.0f }, axis_y = { 0.0f,1.0f,0.0f }, axis_z = { 0.0f,0.0f,1.0f }, axis_xy = {1,1,0}, axis_xz = { 1,0,1 }, axis_yz = { 0,1,1 };
 	vec3 vec3jeje = { 20.0f,900.0f, 0.0f };
 
-	/*Cube c(10, 4, 10);
-	c.SetPos(0, 100, 0);
-	c.color = White;
-
-	float mass = 0.0f;*/
+	
 	Cube start_plat;//
 	bool plat_done = true;
 	
-	//= (10.0f, 4.0f, 10.0f);
+	PhysBody3D* trap_01 = nullptr;
+	PhysBody3D* trap_02 = nullptr;
+	Cube trap = Cube(1, 1, 1);
+	Cube trap2 = Cube(10, 10, 10);
+	PhysBody3D* trap_01_2 = nullptr;
+	PhysBody3D* trap_02_2 = nullptr;
+	Cube trap_2 = Cube(2, 2, 2);
+	Cube trap2_2 = Cube(2, 2, 2);
 };

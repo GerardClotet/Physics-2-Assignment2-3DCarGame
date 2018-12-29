@@ -38,4 +38,17 @@ public:
 
 	bool mat1 = false;
 	bool mat2 = false;
+
+	mat4x4 NinetyDegCCwise_mat = mat4x4(
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+
+	mat4x4 MidTurnDegCCwise_mat = mat4x4(
+		-1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, -1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+
 };

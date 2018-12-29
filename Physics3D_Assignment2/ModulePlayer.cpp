@@ -122,8 +122,9 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(-104.7, 75, 38.3);
 	
+	vehicle->SetTransform(NinetyDegCCwise_mat.M);
+	vehicle->SetPos(START_POINT);
 	App->camera->Position.x = vehicle->GetPos().x;
 	return true;
 }
@@ -323,18 +324,7 @@ void ModulePlayer::ResetPlayer()
 	vehicle->vehicle->getRigidBody()->setLinearVelocity(btVector3(0, 0, 0));
 	vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
 
-	mat4x4 NinetyDegCCwise_mat = mat4x4(
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f);
-
-	mat4x4 MidTurnDegCCwise_mat = mat4x4(
-		-1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, -1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f);
-
+	
 
 	if (mat1)
 	{

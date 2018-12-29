@@ -67,7 +67,15 @@ void ModuleSceneIntro::Speedway()
 		cubes_item->data.Render();
 		cubes_item = cubes_item->next;
 	}
-	
+
+	trap2.Render();
+	trap2_2.Render();
+
+	mat4x4 transform;
+	trap_02->GetTransform(transform.M);
+	trap2.transform = transform;
+	trap_02_2->GetTransform(transform.M);
+	trap2_2.transform = transform;
 }
 
 
@@ -126,24 +134,33 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red);
 	CreateCube(vec3(15, 2, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x);
 	
 	CreateStraigthPath(-100, 1.5, 225, 40, 25,true);
-	CreateStraigthPath(-120, 1.5, 195, 8, 25, false);
+	//CreateStraigthPath(-120, 1.5, 195, 8, 25, false);
+	
+	//setting up the trap at the 2n circuit
+	trap.SetPos(-27, 0, -133);
+	trap.color = Red;
+	trap_01 = App->physics->AddBody(trap, 0);
+
+
+	trap2.SetPos(-27, 0, -137);
+	trap2.color = Red;
+	trap_02 = App->physics->AddBody(trap2, 50);
+
+	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*trap_01, *trap_02, vec3(0, 0, 0), vec3(0, 0, -6), vec3(0, 1, 0), vec3(0, 1, 0), false);
+	hinge->enableAngularMotor(true, 2.0f, INFINITE);
+	trap_2.SetPos(96, 0, -157);
+	trap_2.color = Red;
+	trap_01_2 = App->physics->AddBody(trap_2, 0);
+
+
+	trap2_2.SetPos(96, 0, -161);
+	trap2_2.color = Red;
+	trap_02_2 = App->physics->AddBody(trap2_2, 50);
+
+	btHingeConstraint* hinge_2 = App->physics->AddConstraintHinge(*trap_01_2, *trap_02_2, vec3(0, 0, 0), vec3(0, 0, -6), vec3(0, 1, 0), vec3(0, 1, 0), false);
+	hinge_2->enableAngularMotor(true, -2.0f, INFINITE);
 }
 
-//void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
-//{
-//	Cube cube(dimension.x, dimension.y, dimension.z);
-//	cube.SetPos(pos.x, pos.y, pos.z);
-//	
-//	if (angle != 0)
-//	{
-//		cube.SetRotation(angle, vec3(rotDir.x, rotDir.y, rotDir.z));
-//	}
-//
-//	cube.color = color;
-//
-//	App->physics->AddBody(cube, mass);
-//	cubes.add(cube);
-//}
 
 void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, vec3 u, float mass)
 {
