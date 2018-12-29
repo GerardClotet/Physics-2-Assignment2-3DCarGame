@@ -140,9 +140,21 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
-
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		mat1 = true;
+		mat2 = false;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		mat1 = false;
+		mat2 = true;
+	}
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
+		mat2 = true;
+		ResetPlayer();
+
 		vehicle->SetPos(START_POINT);
 	}
 	//App->camera->Position = front_vec + vehicle->GetPos();
@@ -304,4 +316,32 @@ vec3 ModulePlayer::PlayerCamPos()
 	/*LOG("front vec.z: %f", front_vec.x);
 	LOG("cam TransZ: %f", camera_transitionZ);*/
 	return App->camera->Position;
+}
+
+void ModulePlayer::ResetPlayer()
+{
+	vehicle->vehicle->getRigidBody()->setLinearVelocity(btVector3(0, 0, 0));
+	vehicle->vehicle->getRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
+
+	mat4x4 NinetyDegCCwise_mat = mat4x4(
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+
+	mat4x4 MidTurnDegCCwise_mat = mat4x4(
+		-1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, -1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+
+
+	if (mat1)
+	{
+		vehicle->SetTransform(MidTurnDegCCwise_mat.M);
+	}
+	if (mat2)
+	{
+		vehicle->SetTransform(NinetyDegCCwise_mat.M);
+	}
 }

@@ -8,7 +8,7 @@ class vec3;
 #define MAX_ACCELERATION 1000.0f
 #define TURN_DEGREES 15.0f * DEGTORAD
 #define BRAKE_POWER 1000.0f
-#define START_POINT 0,103,0
+#define START_POINT -48, 100, 38.3
 class ModulePlayer : public Module
 {
 public:
@@ -19,6 +19,7 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	void ResetPlayer();
 	vec3 PlayerCamPos();
 public:
 
@@ -34,4 +35,7 @@ public:
 	float camera_transitionZ;
 	bool turn_increase;
 	bool rotOrigin;
+
+	bool mat1 = false;
+	bool mat2 = false;
 };

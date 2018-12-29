@@ -26,7 +26,7 @@ public:
 	void Speedway();
 	void LoadSpeedWay();
 	void CreateCube(vec3 dimension = { 1.0f,1.0f,1.0f }, vec3 position = { 0.0f, 0.0f, 0.0f }, Color color = White, float angle = 0.0f, vec3 u = (0.0f, 0.0f, 0.0f), float mass = 0.0f);
-	//void CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color);
+	void CreateStraigthPath(float dim_x , float dim_y, float dim_z,float length, float width, bool direction);
 public:
 	/*
 	PhysBody3D* pb_snake[MAX_SNAKE];

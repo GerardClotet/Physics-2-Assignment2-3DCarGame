@@ -88,7 +88,7 @@ void ModuleSceneIntro::LoadSpeedWay()
 	CreateCube(PLATFORM, vec3(0, 102.2, 0.3), Red);
 
 	//START_RAMP
-	CreateCube(ROAD_TRY, vec3(vec3_zero.x, vec3_zero.y + +98.8f, 14.4f), White, 20.0f, axis_x);
+	CreateCube(ROAD_TRY, vec3(vec3_zero.x, 98.8f, 14.4f), White, 20.0f, axis_x);
 	CreateCube(vec3(10,0.5,7), vec3(vec3_zero.x, vec3_zero.y + +93, 30), White, 20.0f, axis_x);
 
 	//2nd PLAT
@@ -98,7 +98,7 @@ void ModuleSceneIntro::LoadSpeedWay()
 	CreateCube(vec3(40, 0.5, 15), vec3(-25, 95, 38.3), White, -10, axis_z);
 
 	//3 PLAT
-	CreateCube(PLATFORM, vec3(-48, 98.5f, 38.3), Red);
+CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red);
 
 	//JUMP
 	CreateCube(vec3(3, 0.5, 15), vec3(-54, 98, 38.3), Green, 45, axis_z);
@@ -121,10 +121,12 @@ void ModuleSceneIntro::LoadSpeedWay()
 	//Plat
 	CreateCube(vec3(80, 0.5, 15), vec3(-120, 75, 38.3), Yellow);
 	
-	CreateCube(vec3(15, 0.5, 100), vec3(-120, 49.4, 88), White, 30, axis_x);
+	CreateCube(vec3(80, 0.5, 100), vec3(-120, 50, 88), White, 30, axis_x);
 	
-	CreateCube(vec3(15, 0.5, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x);
+	CreateCube(vec3(15, 2, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x);
 	
+	CreateStraigthPath(-100, 1.5, 225, 40, 25,true);
+	CreateStraigthPath(-120, 1.5, 195, 8, 25, false);
 }
 
 //void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
@@ -158,4 +160,43 @@ void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, 
 	cubes.add(cube);
 
 	//return c;
+}
+
+
+void ModuleSceneIntro::CreateStraigthPath(float pos_x, float pos_y, float pos_z, float length, float width,bool direction)
+{
+	
+	int current_pos = 0;
+	for (int i = 0; i < length; i++)
+	{
+		current_pos += 5;
+
+		switch (direction)
+		{
+		case true:
+			if (i == 0)
+			{
+				CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z + 0.5f*width), Orange);
+				CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z - 0.5f*width), Orange);
+
+			}
+
+			
+				CreateCube(vec3(3, 4, 3), vec3(pos_x + current_pos, pos_y, pos_z + 0.5f*width), White);
+				CreateCube(vec3(3, 4, 3), vec3(pos_x + current_pos, pos_y, pos_z - 0.5*width), Green);
+			
+			break;
+		case false:
+
+			if (i == 0)
+			{
+				CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z ), Orange);
+				CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z ), Orange);
+			}
+			CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
+			CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
+		}
+		
+		
+	}
 }
