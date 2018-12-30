@@ -194,7 +194,10 @@ update_status ModulePlayer::Update(float dt)
 	else rotOrigin = true;
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		brake = BRAKE_POWER;
+		if (vehicle->GetKmh()>1)
+			brake = BRAKE_POWER;
+		else
+			acceleration = BACK_ACCELERATION;
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
