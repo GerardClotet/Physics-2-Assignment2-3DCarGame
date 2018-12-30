@@ -6,7 +6,6 @@ Project for Physics II subject. The main goal here is to create a race car game 
  - Win/Lose condition with a timer
  - A circuit
  - A camera that follows always the car
- - At  
 
 This project has been done by two students of CITM - UPC (Terrasa, Spain).  
 
@@ -40,7 +39,7 @@ _IMPORTANT: do not modify, change or add any folder or file as you might not be 
 
 ## How to play
 
-You just have to do 3 laps before times runs out (3 minutes and 15 seconds). The speedway is going to be a hell be careful of diferent evil constraints. If you turn upside down you can also respawn in the last sensor you've passed (see controls for more details).
+You just have to do 1 lap before times runs out (45 seconds). The speedway is going to be a hell be careful of diferent evil constraints, and different traps and this car runs fast as "F***". If you turn upside down you can also respawn at the start point (see controls for more details).
 
 That's it, hope you have fun!
 
