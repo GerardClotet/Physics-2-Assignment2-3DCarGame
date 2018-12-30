@@ -241,11 +241,19 @@ update_status ModulePlayer::Update(float dt)
 	if (l_min > 0.0f)
 		l_sec_int -= (int)l_min * 60;
 
+	if (App->scene_intro->playerwon = true)
+	{
+		sec = 0.0f;
+		min = 0.0f;
+		hour = 0.0f;
+	}
+
+
 	sprintf_s(title, "%.1f Km/h Current time: %i:%i:%i", vehicle->GetKmh(), (int)hour, (int)min, l_sec_int);
 	//char title[80];
 //	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
-
+	
 	return UPDATE_CONTINUE;
 }
 

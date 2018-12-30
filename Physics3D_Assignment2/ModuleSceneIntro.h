@@ -77,6 +77,7 @@ public:
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
 	PhysBody3D* ground_sensor = nullptr;
+	PhysBody3D* lap_sensor = nullptr;
 
 	DebugDrawer* timedraw;
 	
@@ -89,7 +90,11 @@ public:
 	
 	Cube start_plat;//
 	bool plat_done = true;
-	
+	int lap_timer;
+	bool playerwon = false;
+	bool timeexced = false;
+	int lap_time = 60;
+	uint win_sfx = 0u;
 	PhysBody3D* trap_01 = nullptr;
 	PhysBody3D* trap_02 = nullptr;
 	Cube trap = Cube(1, 1, 1);

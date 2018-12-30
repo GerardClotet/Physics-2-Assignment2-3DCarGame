@@ -52,7 +52,7 @@ update_status ModuleCamera3D::Update(float dt)
 		logg = 1;
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) && debugMove == true) debugMove = false; logg = 0;
-	LOG("%i", logg);
+	//LOG("%i", logg);
 	
 	if (debugMove==true)
 	{

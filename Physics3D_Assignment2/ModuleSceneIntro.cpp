@@ -17,14 +17,25 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
+
+	App->audio->PlayMusic("music/mainsong.wav");
+	win_sfx = App->audio->LoadFx("music/win.wav");
+
+	playerwon = false;
 	LOG("Loading Intro assets");
 	bool ret = true;
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	
-	Cube cube_ground_sensor(500.0f, 0.0f, 500.0f);
+	Cube cube_ground_sensor(1500.0f, 0.0f, 1500.0f);
 	cube_ground_sensor.SetPos(0.0, 0.0f, 0.0f);
 	ground_sensor = App->physics->AddBody(cube_ground_sensor, App->scene_intro, true,0.0f);
 	
+	Cube cube_lap_sensor(1, 5, 10);
+	cube_lap_sensor.SetPos(-40, 103, 38.3);
+	lap_sensor = App->physics->AddBody(cube_lap_sensor, App->scene_intro, true, 0.0f);
+	
+	
+
 	LoadSpeedWay();
 	return ret;
 }
@@ -40,14 +51,25 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+
+
+	
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
 	Speedway();
 	Pendulums();
+	lap_timer = (int)App->player->s_timer.Read()/1000;
 
+	if (lap_timer == 45) {
+		timeexced = true;
+		App->player->mat2 = true;
+		App->player->ResetPlayer();
+
+		App->player->vehicle->SetPos(START_POINT);
+
+	}
 	
-
 	return UPDATE_CONTINUE;
 	
 }
@@ -55,13 +77,24 @@ update_status ModuleSceneIntro::Update(float dt)
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body1 == ground_sensor) {
-		LOG("it woooooooooorks");
+
 		App->player->mat2 = true;
 		App->player->ResetPlayer();
 
 		App->player->vehicle->SetPos(START_POINT);
 	}
 
+	if (body1 == lap_sensor&& timeexced == false )
+	{
+		App->audio->PlayFx(win_sfx);
+		App->player->mat2 = true;
+		App->player->ResetPlayer();
+
+		App->player->vehicle->SetPos(START_POINT);
+		App->player->s_timer.Stop();
+		playerwon = true;
+		
+	}
 
 
 }
@@ -102,7 +135,9 @@ void ModuleSceneIntro::LoadSpeedWay()
 	//2n RAMP
 	CreateCube(vec3(300, 0.5, 15), vec3(100, 52, 38.3), White, -19, axis_z);
 
+	//test sensor
 
+	//CreateCube(vec3(1, 5, 10), vec3(-40, 103, 38.3), White);
 	//JUMP
 	CreateCube(vec3(3, 0.5, 15), vec3(-54, 98, 38.3), Green, 45, axis_z);
 	CreateCube(vec3(3, 0.5, 15), vec3(-56, 96, 38.3), Pink, 43, axis_z);
