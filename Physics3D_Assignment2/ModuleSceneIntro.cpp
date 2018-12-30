@@ -5,6 +5,8 @@
 #include "PhysBody3D.h"
 #include "ModulePhysics3D.h"
 #include "ModuleRenderer3D.h"
+#include "ModulePlayer.h"
+#include"PhysVehicle3D.h"
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -17,18 +19,10 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
-//	App->physics->draw3d
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	//App->camera->LookAt(vec3(0, 0, 0));
-	btVector3 hola(1, 2, 1);
-	const char* addeu ="hola";
-	//timedraw->draw3dText(hola, addeu);
-	//App->renderer3D(timedraw);
-	/*Cube start_plat(10, 4, 10);
-	start_plat.SetPos(0,100,0);
-	start_plat.color = White;
-	float mass = 0.0f;
-	App->physics->AddBody(start_plat,mass);*/
+	
+	
+	
 	LoadSpeedWay();
 	return ret;
 }
@@ -48,7 +42,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 	Speedway();
+	Pendulums();
+
 	
+
 	return UPDATE_CONTINUE;
 	
 }
@@ -87,14 +84,9 @@ void ModuleSceneIntro::LoadSpeedWay()
 {
 #define ROAD_TRY vec3(10,0.5,20)
 #define PLATFORM vec3(10,0.5f,10)
-	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x), White);
-	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x + STANDARD_SIZE.z), White);
-	CreateCube(STANDARD_SIZE, vec3(vec3_zero.x, vec3_zero.y, vec3_zero.x + STANDARD_SIZE.z * 2), White);
+	
 
-	////PROVA
-	//CreateCube(vec3(3, 0.5, 15), vec3(5, 100, -15), Orange, -10, axis_xy);
-	//CreateCube(vec3(3, 0.5, 15), vec3(0, 100, -17), LightBlue, 40, axis_yz);
-	//CreateCube(vec3(3, 0.5, 15), vec3(-5, 100, -20), Yellow, 5, axis_yz);
+
 
 	//START_PLATFORM
 	CreateCube(PLATFORM, vec3(0, 102.2, 0.3), Red , Platform);
@@ -123,7 +115,7 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-72.5, 84, 38.3), Pink, 27, axis_z, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-76, 82.3, 38.3), LightBlue, 24, axis_z, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-80.3, 80.3, 38.3), Yellow, 21, axis_z, Platform);
-	CreateCube(vec3(4, 0.5, 15), vec3(-85.2, 78.7, 38.3), Orange, 18, axis_z, Platform);
+	CreateCube(vec3(4, 0.5, 15), vec3(-85, 78.7, 38.3), Orange, 18, axis_z, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-89.2, 77.5, 38.3), Red, 15, axis_z, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-93.2, 76.5, 38.3), Green, 12, axis_z, Platform);
 	CreateCube(vec3(4, 0.5, 15), vec3(-97.1, 75.8, 38.3), Pink, 9, axis_z, Platform);
@@ -137,20 +129,25 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 	
 	CreateCube(vec3(15, 2, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x, Platform);
 	
-	CreateStraigthPath(-100, 1.5, 225, 40, 25,true);
-	//CreateStraigthPath(-120, 1.5, 195, 8, 25, false);
+	CreateStraigthPath(-100, 1.5, 247, 40, 25,true);
+
+	CreateStraigthPath(-134, 1.5, 259.8, 6, 0, true);
+	CreateStraigthPath(-133, 1.5, 240, 3, 0, false);
+	CreateStraigthPath(-120.5, 1.5, 195, 8, 25, false);
 	
-	//setting up the trap at the 2n circuit
-	trap.SetPos(-27, 0, -133);
+	CreateCube(vec3(30, 0.5, 25), vec3(108, 4, 247), White, 20, axis_z, Platform);
+
+	//Rotation Boxes
+	trap.SetPos(114, 12, 247);
 	trap.color = Red;
 	trap_01 = App->physics->AddBody(trap, 0);
 
 
-	trap2.SetPos(-27, 0, -137);
+	trap2.SetPos(114, 19, 260);
 	trap2.color = Red;
 	trap_02 = App->physics->AddBody(trap2, 50);
 
-	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*trap_01, *trap_02, vec3(0, 0, 0), vec3(0, 0, -6), vec3(0, 1, 0), vec3(0, 1, 0), false);
+	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*trap_01, *trap_02, vec3(0, 0, 0), vec3(0, 0, -20), vec3(0, 1, 0), vec3(0, 1, 0), true);
 	hinge->enableAngularMotor(true, 2.0f, INFINITE);
 	trap_2.SetPos(96, 0, -157);
 	trap_2.color = Red;
@@ -163,26 +160,16 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 
 	btHingeConstraint* hinge_2 = App->physics->AddConstraintHinge(*trap_01_2, *trap_02_2, vec3(0, 0, 0), vec3(0, 0, -6), vec3(0, 1, 0), vec3(0, 1, 0), false);
 	hinge_2->enableAngularMotor(true, -2.0f, INFINITE);
+
+
+	//PENDULUM
+	createPendulum(-120, 84 , 110); //1st
 }
 
 
 
 
-//void ModuleSceneIntro::CreateCube(vec3 dimension, vec3 pos, float angle, vec3 rotDir, float mass, Color color)
-//{
-//	Cube cube(dimension.x, dimension.y, dimension.z);
-//	cube.SetPos(pos.x, pos.y, pos.z);
-//	
-//	if (angle != 0)
-//	{
-//		cube.SetRotation(angle, vec3(rotDir.x, rotDir.y, rotDir.z));
-//	}
-//
-//	cube.color = color;
-//
-//	App->physics->AddBody(cube, mass);
-//	cubes.add(cube);
-//}
+
 
 void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, vec3 u, float mass, Type type)
 {
@@ -202,6 +189,7 @@ void ModuleSceneIntro::CreateCube(vec3 dim, vec3 pos, Color color, float angle, 
 }
 
 
+
 void ModuleSceneIntro::CreateStraigthPath(float pos_x, float pos_y, float pos_z, float length, float width,bool direction)
 {
 	
@@ -210,32 +198,132 @@ void ModuleSceneIntro::CreateStraigthPath(float pos_x, float pos_y, float pos_z,
 	{
 		current_pos += 5;
 
-		switch (direction)
+		if (width != 0)
 		{
-		case true:
-			if (i == 0)
+			switch (direction)
 			{
-				CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z + 0.5f*width), Orange);
-				CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z - 0.5f*width), Orange);
+			case true:
+				if (i == 0)
+				{
+					CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z + 0.5f*width), Orange);
+					CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z - 0.5f*width), Orange);
 
-			}
+				}
 
-			
+
 				CreateCube(vec3(3, 4, 3), vec3(pos_x + current_pos, pos_y, pos_z + 0.5f*width), White);
 				CreateCube(vec3(3, 4, 3), vec3(pos_x + current_pos, pos_y, pos_z - 0.5*width), Green);
-			
-			break;
-		case false:
 
-			if (i == 0)
-			{
-				CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z ), Orange);
-				CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z ), Orange);
+				break;
+			case false:
+
+				if (i == 0)
+				{
+					CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z), Orange);
+					CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z), Orange);
+				}
+				CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
+				CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
 			}
-			CreateCube(vec3(3, 4, 3), vec3(pos_x + 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
-			CreateCube(vec3(3, 4, 3), vec3(pos_x - 0.5f*width, pos_y, pos_z + current_pos), LightBlue);
+		}
+		else if(width ==0)
+		{ 
+			switch (direction)
+			{
+			case true:
+				if (i == 0)
+				{
+					CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z), Orange);
+				}
+				CreateCube(vec3(3, 4, 3), vec3(pos_x + current_pos, pos_y, pos_z ), White);
+				break;
+
+			case false:
+				if (i == 0)
+				{
+					CreateCube(vec3(3, 4, 3), vec3(pos_x, pos_y, pos_z), Orange);
+
+				}
+
+				CreateCube(vec3(3, 4, 3), vec3(pos_x , pos_y, pos_z+ current_pos), White);
+
+			}
 		}
 		
 		
 	}
+}
+
+void ModuleSceneIntro::createPendulum(float x, float y, float z)
+{
+	Sphere sp(0.1f);
+	sp.SetPos(x, y, z);
+	PhysBody3D* spB = App->physics->AddBody(sp, 0);
+
+	Cylinder c;
+	c.radius = 0.3f*2;
+	c.height = 15 * 2;
+	c.SetPos(x + 9 * 2, y, z);
+	c.color = Gray;
+	PhysBody3D* cB = App->physics->AddBody(c, 1000);
+
+	btHingeConstraint* hinge_pendul = App->physics->AddConstraintHinge(*spB, *cB, { 0, 0, 0 }, { 9 * 2, 0, 0 }, { 0, 0, 1 }, { 0, 0, 1 }, true);
+
+	Sphere s;
+	s.radius = 3 * 2;
+	s.SetPos(x + 10.5f*2, y, z);
+	s.color = Gray;
+	PhysBody3D* sB = App->physics->AddBody(s, 2000);
+
+	App->physics->AddConstraintP2P(*cB, *sB, { -9 * 2, 0, 0 }, { 1.5f*2, 0, 0 });
+
+	Pendulum p(s, c, sB, cB);
+	p.hinge_pendul = hinge_pendul;
+	pendulums.add(p);
+}
+
+void Pendulum::Render()
+{
+	//Bar
+	btQuaternion q = cB->GetRotation();
+	q = q.normalized();
+	float angle = 2 * acos(q.w()) * 180 / 3.14;
+	c.SetRotation(angle, { 0,0,1 });
+	c.SetPos(cB->GetPos().x, cB->GetPos().y, cB->GetPos().z);
+	c.Render();
+
+	//Weight
+	s.SetPos(sB->GetPos().x, sB->GetPos().y, sB->GetPos().z);
+	s.Render();
+}
+
+void ModuleSceneIntro::Pendulums()
+{
+	for (p2List_item<Pendulum>* item = pendulums.getFirst(); item; item = item->next)
+	{
+		item->data.Render();
+		if ((item->data.sB->GetPos().y) > 35 && item->data.rising)
+		{
+			item->data.rising = false;
+			int speed;
+			if (item->data.positive)
+			{
+				speed = 700;
+				item->data.positive = false;
+			}
+			else
+			{
+				speed = -700;
+				item->data.positive = true;
+			}
+
+			if (item->data.hinge_pendul != nullptr)
+				item->data.hinge_pendul->enableAngularMotor(true, 10, speed);
+		}
+		else if (item->data.sB->GetPos().y < 30 && !item->data.rising)
+		{
+			item->data.rising = true;
+		}
+	}
+
 }

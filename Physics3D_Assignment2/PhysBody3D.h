@@ -7,7 +7,7 @@
 class btRigidBody;
 class Module;
 class vec3;
-
+struct btQuaternion;
 
 // =================================================
 struct PhysBody3D
@@ -23,6 +23,9 @@ public:
 	void SetPos(float x, float y, float z);
 	void SetAsSensor(bool is_sensor);
 	vec3 GetPos();
+//	btVector3 Get_bt_Pos() ;
+	btQuaternion GetRotation() const;
+	void SetRotation(btQuaternion newQ);
 private:
 	btRigidBody* body = nullptr;
 	bool is_sensor = false;

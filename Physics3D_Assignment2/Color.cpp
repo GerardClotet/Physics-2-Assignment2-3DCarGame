@@ -10,3 +10,4 @@ Color Pink = Color(255, 0, 100);
 Color Yellow = Color(255, 165, 0);
 Color LightBlue = Color(0, 1, 1);
 Color Orange = Color(2, 0.8,0 );
+Color Gray = Color(0.3f, 0.3f, 0.3f);

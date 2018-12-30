@@ -68,3 +68,23 @@ void PhysBody3D::SetAsSensor(bool is_sensor)
 	}
 
 }
+
+btQuaternion PhysBody3D::GetRotation() const
+{
+	btTransform t = body->getWorldTransform();
+	return t.getRotation();
+}
+
+void PhysBody3D::SetRotation(btQuaternion newQ)
+{
+	btTransform t = body->getWorldTransform();
+	t.setRotation(newQ);
+	body->setWorldTransform(t);
+}
+
+//btVector3 PhysBody3D::Get_bt_Pos() 
+//{
+//	btTransform t = body->getWorldTransform();
+//	return t.getOrigin();
+//}
+

@@ -34,3 +34,4 @@ extern Color Pink;
 extern Color Yellow;
 extern Color LightBlue;
 extern Color Orange;
+extern Color Gray;

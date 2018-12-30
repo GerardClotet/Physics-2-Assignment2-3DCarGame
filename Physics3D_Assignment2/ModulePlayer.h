@@ -51,4 +51,6 @@ public:
 		0.0f, 0.0f, -1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);
 
+	char title[250];
+	Timer s_timer;
 };

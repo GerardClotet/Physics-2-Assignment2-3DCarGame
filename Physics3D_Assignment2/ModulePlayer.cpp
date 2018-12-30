@@ -17,6 +17,8 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
+
+	s_timer.Start();
 	jumpForceY = 3000;
 	// Camera Var
 	camera_transitionX = 10;
@@ -216,8 +218,29 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
-	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	float sec = (float)s_timer.Read() / 1000.0f;
+	float min = sec / 60.0f;
+	float hour = min / 60.0f;
+
+	float l_sec = (float)s_timer.Read() / 1000.0f;
+	float l_min = l_sec / 60.0f;
+	float l_hour = l_min / 60.0f;
+
+	int l_sec_int = (int)l_sec;
+
+	if (l_min < 1.0f)
+		l_min = 0.0f;
+	if (l_sec < 1.0f)
+		l_sec = 0.0f;
+	if (l_hour < 1.0f)
+		l_hour = 0.0f;
+
+	if (l_min > 0.0f)
+		l_sec_int -= (int)l_min * 60;
+
+	sprintf_s(title, "%.1f Km/h Current time: %i:%i:%i", vehicle->GetKmh(), (int)hour, (int)min, l_sec_int);
+	//char title[80];
+//	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
