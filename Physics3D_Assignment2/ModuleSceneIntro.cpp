@@ -56,6 +56,10 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body1 == ground_sensor) {
 		LOG("it woooooooooorks");
+		App->player->mat2 = true;
+		App->player->ResetPlayer();
+
+		App->player->vehicle->SetPos(START_POINT);
 	}
 
 
