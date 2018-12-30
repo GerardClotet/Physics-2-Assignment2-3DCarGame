@@ -101,6 +101,6 @@ public:
 	PhysBody3D* trap_01_2 = nullptr;
 	PhysBody3D* trap_02_2 = nullptr;
 	Cube trap_2 = Cube(2, 2, 2);
-	Cube trap2_2 = Cube(2, 2, 2);
+	Cube trap2_2 = Cube(50, 50, 50);
 	
 };

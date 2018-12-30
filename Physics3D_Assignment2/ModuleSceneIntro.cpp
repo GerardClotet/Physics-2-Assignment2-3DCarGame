@@ -87,21 +87,27 @@ void ModuleSceneIntro::LoadSpeedWay()
 	
 
 
+	//safe
 
-	//START_PLATFORM
-	CreateCube(PLATFORM, vec3(0, 102.2, 0.3), Red , Platform);
+	////START_PLATFORM
+	//CreateCube(PLATFORM, vec3(0, 102.2, 0.3), Red , Platform);
 
-	//START_RAMP
-	CreateCube(ROAD_TRY, vec3(vec3_zero.x, 98.8f, 14.4f), White, 20.0f, axis_x, Platform);
-	CreateCube(vec3(10,0.5,7), vec3(vec3_zero.x, vec3_zero.y + +93, 30), White, 20.0f, axis_x, Platform);
+	////START_RAMP
+	//CreateCube(ROAD_TRY, vec3(vec3_zero.x, 98.8f, 14.4f), White, 20.0f, axis_x, Platform);
+	//CreateCube(vec3(10,0.5,7), vec3(vec3_zero.x, vec3_zero.y + +93, 30), White, 20.0f, axis_x, Platform);
 
-	//2nd PLAT
-	CreateCube(PLATFORM, vec3(0, 91.8, 38.3), Red, Platform);
+	////safe 
+	//CreateCube(PLATFORM, vec3(0, 91.8, 38.3), Red, 90,axis_z, Platform);
+
+	////START_PLATFORM
+	//CreateCube(PLATFORM, vec3(0, 96, 38.3), Red, Platform);
 
 	//2n RAMP
-	CreateCube(vec3(40, 0.5, 15), vec3(-25, 95, 38.3), White, -10, axis_z, Platform);
+	CreateCube(vec3(380, 0.5, 15), vec3(135, 35, 38.3), White, -20, axis_z, Platform);
 
-	//3 PLAT
+	//safe
+	CreateCube(PLATFORM, vec3(-43, 112, 38.3), Red, 90, axis_z, Platform);
+	//START_PLATFORM
 CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 
 	//JUMP
@@ -124,7 +130,9 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 
 	//Plat
 	CreateCube(vec3(80, 0.5, 15), vec3(-120, 75, 38.3), Yellow, Platform);
-	
+	CreateStraigthPath(-160, 77, 32.5, 11, 0, true);
+	CreateStraigthPath(-160, 77, 32.5, 2,0, false);
+	//Big fall
 	CreateCube(vec3(80, 0.5, 100), vec3(-120, 50, 88), White, 30, axis_x, Platform);
 	
 	CreateCube(vec3(15, 2, 60), vec3(-120, 16.5, 155), Pink, 20, axis_x, Platform);
@@ -135,8 +143,15 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 	CreateStraigthPath(-133, 1.5, 240, 3, 0, false);
 	CreateStraigthPath(-120.5, 1.5, 195, 8, 25, false);
 	
+	//Devil Square
 	CreateCube(vec3(30, 0.5, 25), vec3(108, 4, 247), White, 20, axis_z, Platform);
+	CreateCube(vec3(30, 0.5, 25), vec3(234, 4, 247), White, -20, axis_z, Platform);
 
+	CreateStraigthPath(250, 1.5, 247, 5, 25, true);
+	CreateStraigthPath(280, 1.5, 259.5, 4, 0, true);
+	CreateStraigthPath(303, 1.5, 230, 5, 0, false);
+
+	CreateStraigthPath(290, 1.5, 53, 35, 25, false);
 	//Rotation Boxes
 	trap.SetPos(114, 12, 247);
 	trap.color = Red;
@@ -149,21 +164,29 @@ CreateCube(PLATFORM, vec3(-48, 100, 38.3), Red, Platform);
 
 	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*trap_01, *trap_02, vec3(0, 0, 0), vec3(0, 0, -20), vec3(0, 1, 0), vec3(0, 1, 0), true);
 	hinge->enableAngularMotor(true, 2.0f, INFINITE);
-	trap_2.SetPos(96, 0, -157);
+	trap_2.SetPos(0, 25, 0);
 	trap_2.color = Red;
 	trap_01_2 = App->physics->AddBody(trap_2, 0);
 
 
-	trap2_2.SetPos(96, 0, -161);
+	trap2_2.SetPos(1000, 72, 1000);
 	trap2_2.color = Red;
 	trap_02_2 = App->physics->AddBody(trap2_2, 50);
 
-	btHingeConstraint* hinge_2 = App->physics->AddConstraintHinge(*trap_01_2, *trap_02_2, vec3(0, 0, 0), vec3(0, 0, -6), vec3(0, 1, 0), vec3(0, 1, 0), false);
+	btHingeConstraint* hinge_2 = App->physics->AddConstraintHinge(*trap_01_2, *trap_02_2, vec3(0, 0, 0), vec3(0, 0, -425), vec3(0, 1, 0), vec3(0, 1, 0), false);
 	hinge_2->enableAngularMotor(true, -2.0f, INFINITE);
 
 
 	//PENDULUM
 	createPendulum(-120, 84 , 110); //1st
+	createPendulum(290, 48, 190);
+	createPendulum(290, 48, 170);
+	createPendulum(290, 48, 150);
+	createPendulum(290, 48, 130);
+	createPendulum(290, 48, 110);
+	createPendulum(290, 48, 90);
+
+
 }
 
 
