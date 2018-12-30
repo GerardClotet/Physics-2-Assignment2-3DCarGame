@@ -34,7 +34,7 @@ _IMPORTANT: do not modify, change or add any folder or file as you might not be 
 - CAMERA UP & DOWN : R & F
 - CAMERA INCREASE SPEED: LEFTSHIFT
 - ROTATE CAMERA:  RIGHT click
-- SPAWN PLAYER  (last sensor): L
+- SPAWN PLAYER  : L
 
 
 ## How to play
