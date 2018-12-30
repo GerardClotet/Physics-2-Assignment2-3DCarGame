@@ -12,12 +12,7 @@ class DebugDrawer;
 struct PhysBody3D;
 struct PhysMotor3D;
 struct btHingeConstraint;
-enum Type {
-	Platform,
-	Offlimit,
-	Lap,
-	NoType
-};
+
 struct Pendulum
 {
 public:
@@ -51,7 +46,7 @@ public:
 
 	void Speedway();
 	void LoadSpeedWay();
-	void CreateCube(vec3 dimension = { 1.0f,1.0f,1.0f }, vec3 position = { 0.0f, 0.0f, 0.0f }, Color color = White, float angle = 0.0f, vec3 u = (0.0f, 0.0f, 0.0f), float mass = 0.0f, Type type = NoType);
+	void CreateCube(vec3 dimension = { 1.0f,1.0f,1.0f }, vec3 position = { 0.0f, 0.0f, 0.0f }, Color color = White, float angle = 0.0f, vec3 u = (0.0f, 0.0f, 0.0f), float mass = 0.0f);
 	void CreateStraigthPath(float dim_x , float dim_y, float dim_z,float length, float width, bool direction);
 	void createPendulum(float x, float y, float z);
 
@@ -81,6 +76,7 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+	PhysBody3D* ground_sensor = nullptr;
 
 	DebugDrawer* timedraw;
 	
